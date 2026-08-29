@@ -1,0 +1,69 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "studio-gemma4-q8": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Studio - Gemma 4 31B Q8",
+      "options": {
+        "baseURL": "http://100.97.150.103:8082/v1"
+      },
+      "models": {
+        "/Users/Shared/models/mlx/gemma4-31b-8bit": {
+          "name": "Gemma 4 31B Q8"
+        }
+      }
+    },
+    "studio-gemma4-optiq-q4": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Studio - Gemma 4 31B OptiQ Q4",
+      "options": {
+        "baseURL": "http://100.97.150.103:8081/v1"
+      },
+      "models": {
+        "/Users/Shared/models/mlx/gemma-4-31B-it-qat-OptiQ-4bit": {
+          "name": "Gemma 4 31B OptiQ Q4"
+        }
+      }
+    },
+    "studio-mistral-small-119B-5bit":{
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Studio - Mistral Small 119B 5bit",
+      "options": {
+        "baseURL": "http://100.97.150.103:8083/v1"
+      },
+      "models": {
+        "/Users/Shared/models/mlx/Mistral-Small-4-119B-2603-5bit": {
+          "name": "Mistral Small 119B 5bit"
+        }
+      }
+    }
+  },
+  "agent": {
+    "tf-interaction-agent": {
+      "description": "Precise local AI assistant that finds transcription factor (TF) regulatory interactions using a local TRRUST database. Use it when the user asks about transcription factors, target genes, or activation/repression relationships for a specific gene symbol (e.g. TP53, MYC, STAT3).",
+      "mode": "primary",
+      "model": "studio-gemma4-optiq-q4//Users/Shared/models/mlx/gemma-4-31B-it-qat-OptiQ-4bit",
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "prompt": "You are a precise local AI assistant driven by Google Gemma 4 tasked with finding crucial Transcription Factor interactions. Use your tools and databases when needed. You need to find other factors that are stimulated when given transcription factor stimulation circuits.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "query-local-trrust-database": "allow"
+      }
+    },
+    "whisper_voice_to_text_agent":{
+      "description": "This AI subagent will transcribe audio files given by the user to text. If the text contains a query, an answer will be provided by the LLM model it functions on.",
+      "mode": "subagent",
+      "model": "studio-gemma4-optiq-q4//Users/Shared/models/mlx/gemma-4-31B-it-qat-OptiQ-4bit",
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "prompt": "You are a precise local AI assistant driven by Google Gemma 4 tasked with transcribing voice audio files into text. Utilize the tools available to you to transcribe the audio. You will simply need to transcribe or also answer questions or queries given by the transcribed audio.",
+      "permission": {
+        "whispr": "allow"
+      }
+    }
+  }
+}
