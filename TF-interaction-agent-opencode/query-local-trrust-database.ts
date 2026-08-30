@@ -7,7 +7,7 @@ import path from "path"
  * launching opencode, e.g.:
  */
 const TRRUST_FILE_PATH =
-  process.env.TRRUST_FILE_PATH ?? "/Users/b.hyunyi/Desktop/TF-interaction-agent-opencode/trrust_rawdata.human.tsv"
+  process.env.TRRUST_FILE_PATH ?? "/path/to/trrust_rawdata.human.tsv"
 
 export default tool({
   description:
