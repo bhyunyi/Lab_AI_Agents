@@ -5,7 +5,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Studio - Gemma 4 31B Q8",
       "options": {
-        "baseURL": "http://100.97.150.103:8082/v1"
+        "baseURL": "http://100.X.X.X:8082/v1"
       },
       "models": {
         "/Users/Shared/models/mlx/gemma4-31b-8bit": {
@@ -17,7 +17,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Studio - Gemma 4 31B OptiQ Q4",
       "options": {
-        "baseURL": "http://100.97.150.103:8081/v1"
+        "baseURL": "http://100.X.X.X:8081/v1"
       },
       "models": {
         "/Users/Shared/models/mlx/gemma-4-31B-it-qat-OptiQ-4bit": {
@@ -29,7 +29,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Studio - Mistral Small 119B 5bit",
       "options": {
-        "baseURL": "http://100.97.150.103:8083/v1"
+        "baseURL": "http://100.X.X.X:8083/v1"
       },
       "models": {
         "/Users/Shared/models/mlx/Mistral-Small-4-119B-2603-5bit": {
