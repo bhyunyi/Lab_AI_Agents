@@ -3,8 +3,8 @@ import sys
 import json
 import os
 
-WHISPER_URL = "http://100.97.150.103:8085/transcribe"
-GEMMA_URL = "http://100.97.150.103:8084"
+WHISPER_URL = "http://100.X.X.X:8085/transcribe"
+GEMMA_URL = "http://100.X.X.X:8084"
 
 def process_voice(audio_path: str) -> str:
 
