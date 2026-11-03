@@ -1,0 +1,102 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "studio-gemma4-optiq-q4": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Studio - Gemma 4 31B OptiQ Q4",
+      "options": {
+        "baseURL": "http://100.97.150.103:8000/v1",
+        "apiKey": "truonglabbot"
+      },
+      "models": {
+        "gemma-4-31B-it-qat-OptiQ-4bit": {
+          "name": "Gemma 4 31B OptiQ Q4"
+        }
+      }
+    },
+    "studio-mistral-small-119B-5bit":{
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Studio - Mistral Small 119B 5bit",
+      "options": {
+        "baseURL": "http://100.97.150.103:8000/v1",
+        "apiKey": "truonglabbot"
+      },
+      "models": {
+        "Mistral-Small-4-119B-2603-5bit": {
+          "name": "Mistral Small 119B 5bit"
+        }
+      }
+    }
+  },
+  "agent": {
+    "tf-interaction-trrust_gemma4": {
+      "description": "Precise local AI assistant that finds transcription factor (TF) regulatory interactions using a local TRRUST database. Use it when the user asks about transcription factors, target genes, or activation/repression relationships for a specific gene symbol (e.g. TP53, MYC, STAT3). CRITICAL: Use this for fast, everyday transcription factor lookups.",
+      "mode": "primary",
+      "model": "studio-gemma4-optiq-q4/gemma-4-31B-it-qat-OptiQ-4bit",
+      "temperature": 0.3,
+      "prompt": "You are a precise local AI assistant driven by Google Gemma 4 tasked with finding crucial Transcription Factor interactions. Use your tools and databases when needed. You need to find other factors that are stimulated when given transcription factor stimulation circuits.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "query-local-trrust-database": "allow"
+      }
+    },
+    "tf-interaction-trrust_mistralsmall": {
+      "description": "Precise local AI assistant that finds transcription factor (TF) regulatory interactions using a local TRRUST database. Use it when the user asks about transcription factors, target genes, or activation/repression relationships for a specific gene symbol (e.g. TP53, MYC, STAT3). CRITICAL: Use this only for complex, edge-case biological queries requiring maximum reasoning depth.",
+      "mode": "primary",
+      "model": "studio-mistral-small-119B-5bit/Mistral-Small-4-119B-2603-5bit",
+      "temperature": 0.1,
+      "prompt": "You are a precise local AI assistant tasked with finding crucial Transcription Factor interactions. You need to find other factors that are stimulated when given transcription factor stimulation circuits. CRITICAL TOOL CONFIGURATION: You have access to ONE database tool named exactly 'query-local-trrust-database'. You must use the exact name 'query-local-trrust-database' when executing database lookups. You are strictly forbidden from calling a tool named 'database' or shortening the tool name.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "query-local-trrust-database": "allow",
+        "database": "allow"
+      }
+    },
+    "tf-interaction-TFMarker_gemma4": {
+      "description": "Precise local AI assistant that finds transcription factor (TF) regulatory interactions using a local TFMarker database. Use it when the user asks about transcription factors, target genes, or activation/repression relationships for a specific gene symbol (e.g. TP53, MYC, STAT3). CRITICAL: Use this for fast, everyday transcription factor lookups.",
+      "mode": "primary",
+      "model": "studio-gemma4-optiq-q4/gemma-4-31B-it-qat-OptiQ-4bit",
+      "temperature": 0.3,
+      "prompt": "You are a precise local AI assistant driven by Google Gemma 4 tasked with finding crucial Transcription Factor interactions. Use your tools and databases when needed. You need to find other factors that are stimulated when given transcription factor stimulation circuits. You must evaluate so that the answer is cell type specific (e.g. Macrophages, iPSCs).",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "query-local-TFMarker-database": "allow"
+      }
+    },
+    "tf-interaction-TFMarker_mistralsmall": {
+      "description": "Precise local AI assistant that finds transcription factor (TF) regulatory interactions using a local TFMarker database. Use it when the user asks about transcription factors, target genes, or activation/repression relationships for a specific gene symbol (e.g. TP53, MYC, STAT3). CRITICAL: Use this only for complex, edge-case biological queries requiring maximum reasoning depth.",
+      "mode": "primary",
+      "model": "studio-mistral-small-119B-5bit/Mistral-Small-4-119B-2603-5bit",
+      "temperature": 0.1,
+      "prompt": "You are a precise local AI assistant tasked with finding crucial Transcription Factor interactions. You need to find other factors that are stimulated when given transcription factor stimulation circuits. You must evaluate so that the answer is cell type specific (e.g. Macrophages, iPSCs). CRITICAL TOOL CONFIGURATION: You have access to ONE database tool named exactly 'query-local-TFMarker-database'. You must use the exact name 'query-local-TFMarker-database' when executing database lookups. You are strictly forbidden from calling a tool named 'database' or shortening the tool name.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "query-local-TFMarker-database": "allow",
+        "database": "allow"
+      }
+    },
+    "whisper_voice_to_text_agent":{
+      "description": "This AI subagent will transcribe audio files given by the user to text. If the text contains a query, an answer will be provided by the LLM model it functions on.",
+      "mode": "subagent",
+      "model": "gemma-4-31B-it-qat-OptiQ-4bit",
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "prompt": "You are a precise local AI assistant driven by Google Gemma 4 tasked with transcribing voice audio files into text. Utilize the tools available to you to transcribe the audio. You will simply need to transcribe or also answer questions or queries given by the transcribed audio.",
+      "permission": {
+        "whispr": "allow"
+      }
+    }
+  }
+}
