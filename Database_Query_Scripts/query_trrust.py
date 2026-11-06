@@ -5,21 +5,22 @@ query_trrust.py
 Reads the TRRUST TSV with pandas, filters by gene symbol, and prints a formatted result to stdout.
 
 Usage:
-    python3 query_trrust.py <GENE_SYMBOL> <TRRUST_FILE_PATH>
+    python3 query_trrust.py <GENE_SYMBOL> 
 """
 
 import sys
 import os
 import pandas as pd
 
+TRRUST_FILE_PATH = /path/to/database
 
-def query_local_trrust_database(gene_symbol: str, file_path: str) -> str:
-    if not os.path.exists(file_path):
-        return f"Error: TRRUST file not found at {file_path}. Please verify the path."
+def query_local_trrust_database(gene_symbol: str) -> str:
+    if not os.path.exists(TRRUST_FILE_PATH):
+        return f"Error: TRRUST file not found at {TRRUST_FILE_PATH}. Please verify the path."
 
     try:
         df = pd.read_csv(
-            file_path,
+            TRRUST_FILE_PATH,
             sep="\t",
             header=None,
             names=["Transcription_Factor", "Target_Gene", "Mode", "PubMed_ID"],
@@ -50,10 +51,9 @@ def query_local_trrust_database(gene_symbol: str, file_path: str) -> str:
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python3 query_trrust.py <GENE_SYMBOL> <TRRUST_FILE_PATH>", file=sys.stderr)
+        print("Usage: python3 query_trrust.py <GENE_SYMBOL>", file=sys.stderr)
         sys.exit(1)
 
     gene_symbol_arg = sys.argv[1]
-    file_path_arg = sys.argv[2]
-
-    print(query_local_trrust_database(gene_symbol_arg, file_path_arg))
+    
+    print(query_local_trrust_database(gene_symbol_arg))

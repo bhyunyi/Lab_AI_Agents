@@ -12,14 +12,16 @@ import sys
 import os
 import pandas as pd
 
+CellMarker_FILE_PATH = /path/to/database
 
-def query_local_cellmarker_database(gene_symbol: str, cell_type: str, file_path: str) -> str:
-    if not os.path.exists(file_path):
-        return f"Error: Cell Marker file not found at {file_path}. Please verify the path."
+
+def query_local_cellmarker_database(gene_symbol: str, cell_type: str) -> str:
+    if not os.path.exists(CellMarker_FILE_PATH):
+        return f"Error: Cell Marker file not found at {CellMarker_FILE_PATH}. Please verify the path."
 
     try:
         df = pd.read_csv(
-            file_path,
+            CellMarker_FILE_PATH,
             sep="\t",
             header=0
         )
@@ -55,11 +57,10 @@ def query_local_cellmarker_database(gene_symbol: str, cell_type: str, file_path:
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: python3 query_cellmarker.py <GENE_SYMBOL> <CELL_TYPE> <CELLMARKER_FILE_PATH>", file=sys.stderr)
+        print("Usage: python3 query_cellmarker.py <GENE_SYMBOL> <CELL_TYPE>", file=sys.stderr)
         sys.exit(1)
 
     gene_symbol_arg = sys.argv[1]
     cell_type_arg = sys.argv[2]
-    file_path_arg = sys.argv[3]
 
-    print(query_local_cellmarker_database(gene_symbol_arg, cell_type_arg, file_path_arg))
+    print(query_local_cellmarker_database(gene_symbol_arg, cell_type_arg))
