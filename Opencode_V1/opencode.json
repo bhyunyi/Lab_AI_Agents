@@ -5,8 +5,8 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Studio - Gemma 4 31B OptiQ Q4",
       "options": {
-        "baseURL": "http://100.97.150.103:8000/v1",
-        "apiKey": "truonglabbot"
+        "baseURL": "http://100.X.X.X:8000/v1",
+        "apiKey": "dummy"
       },
       "models": {
         "gemma-4-31B-it-qat-OptiQ-4bit": {
@@ -18,8 +18,8 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "Studio - Mistral Small 119B 5bit",
       "options": {
-        "baseURL": "http://100.97.150.103:8000/v1",
-        "apiKey": "truonglabbot"
+        "baseURL": "http://100.X.X.X:8000/v1",
+        "apiKey": "dummy"
       },
       "models": {
         "Mistral-Small-4-119B-2603-5bit": {
